@@ -116,7 +116,8 @@ public class RMIServiceImpl extends UnicastRemoteObject implements RMISevice {
 
 
 public interface RMISevice extends Remote{
-    String say() throws RemoteException; // 这个异常必须抛出来
+    //接口内的所有的方法申明后面的throws RemoteException 必不可少 ，否则会报错
+    String say() throws RemoteException; 
     UserInfo getUserInfo(String id) throws RemoteException;
 }
 
