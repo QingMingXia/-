@@ -1,0 +1,68 @@
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    private static Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+    /**
+     * 未知系统异常
+     */
+    private static final String UNNORMAL_EXCEPTION_CODE = String.valueOf(ExceptionCode.UNKNOWN_EXCEPTION);
+
+    /**
+     * 数据库查询异常
+     */
+    private static final String DAO_EXCEPTION_CODE = String.valueOf(ExceptionCode.DATABASE_QUERY_EXCEPTION);
+
+    
+    /**
+     * 功能描述: 对业务异常的处理<br>
+     * 〈功能详细描述〉
+    
+     */
+    @ExceptionHandler(value = BusinessException.class)
+    @ResponseBody
+    public Object businessExceptionHandler(HttpServletRequest req, Exception e) {
+       //记录日志
+       //设置成自己喜欢的返回对象格式
+    }
+
+    
+     
+    @ExceptionHandler(value = SystemException.class)
+    @ResponseBody
+    public ResponseObject systemExceptionHandler(HttpServletRequest req, Exception e) {
+     
+    }
+
+   
+    @ExceptionHandler(value = ParameterException.class)
+    @ResponseBody
+    public ResponseObject parameterExceptionHandler(HttpServletRequest req, Exception e) {
+        
+    }
+
+   
+    @ExceptionHandler(value = DaoException.class)
+    @ResponseBody
+    public ResponseObject daoExceptionHandler(HttpServletRequest req, Exception e) {
+        
+    }
+
+  
+    @ExceptionHandler(value = Exception.class)
+    @ResponseBody
+    public ResponseObject exceptionHandler(HttpServletRequest req, Exception e) {
+       
+    }
+
+    
+    private String format(String code, String message) {
+        return String.format("异常码：%s，异常消息：%s", code, message);
+    }
+
+   
+    private void setRequestStatus(HttpServletRequest req) {
+        req.setAttribute(ConstantUtil.ReportLog.REQ_IS_SUCCESS, ConstantUtil.RequestStatus.FAILED);
+    }
+
+}
